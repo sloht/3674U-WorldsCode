@@ -5,10 +5,13 @@
 #include <cmath>
 #include <thread>
 
-#include "../include/autonomous.h"
+#include "../custom/include/autonomous.h"
 #include "motor-control.h"
 
 //set position: x_pos = x; y_pos = y;
 //inertial_sensor.setRotation(θ, deg);
 //AND use correct_angle = desired angle
 
+void long_then_mid_left() {
+
+}

@@ -6,22 +6,24 @@
 // Modify autonomous, driver, or pre-auton code below
 
 void runAutonomous() {
-  int auton_selected = 3;
+  int auton_selected = 1;
   switch(auton_selected) {
     case 1:
-      exampleAuton();
+      seven_ball_left();
       break;
     case 2:
-      exampleAuton2();
+      seven_ball_right();
       break;  
     case 3:
-      redGoalRush();
+      mid_fill_left();
       break;
     case 4:
-      break; 
+      mid_fill_right();
     case 5:
+      long_then_mid_left();
       break;
     case 6:
+      long_then_mid_right();
       break;
     case 7:
       break;
@@ -133,10 +135,13 @@ void runPreAutonomous() {
   
   inertial_sensor.calibrate();
 
-  while (inertial_sensor.isCalibrating()) {
-    wait(10, msec);
-  }
-
+  if (inertial_sensor.isCalibrating()) {
+    while (inertial_sensor.isCalibrating()) {
+      wait(10, msec);
+    }
+    controller_1.rumble(".");
+  } else {
+    controller_1.rumble("...");
   double current_heading = inertial_sensor.heading();
   Brain.Screen.print(current_heading);
   
@@ -151,4 +156,5 @@ void runPreAutonomous() {
   } else {
     thread odom = thread(trackNoOdomWheel);
   }
+}
 }

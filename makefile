@@ -13,6 +13,7 @@ SRC_C += $(wildcard src/*/*.cpp)
 SRC_C += $(wildcard src/*/*.c)
 SRC_C += $(wildcard custom/src/*.cpp)
 SRC_C += $(wildcard custom/src/*.c)
+SRC_C += $(wildcard autons/*.cpp)
 
 OBJ = $(addprefix $(BUILD)/, $(addsuffix .o, $(basename $(SRC_C))) )
 
