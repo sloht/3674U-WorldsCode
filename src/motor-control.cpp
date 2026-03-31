@@ -1397,6 +1397,11 @@ void resetPositionRight() {
     resetPositionWithSensor(right_sensor, right_sensor_offset, 90.0, field_half_size);
 }
 
+void matchloadwait(double t) {
+wait(t, msec);
+matchload.set(true);
+};
+
 // ============================================================================
 // TEMPLATE NOTE
 // ============================================================================

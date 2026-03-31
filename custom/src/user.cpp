@@ -5,6 +5,8 @@
 
 // Modify autonomous, driver, or pre-auton code below
 
+bool drift = false;
+
 void runAutonomous() {
   int auton_selected = 1;
   switch(auton_selected) {
@@ -41,14 +43,18 @@ bool button_a, button_b, button_x, button_y;
 bool button_up_arrow, button_down_arrow, button_left_arrow, button_right_arrow;
 int chassis_flag = 0;
 
-// “button charge detection” for toggles (edge detection)
+
 bool matchloadCD = true;
 bool descoreCD = true;
-bool liftCD = true;
+bool hoodCD = true;
 
 bool matchloadState = false;
 bool descoreState = false;
-bool liftState = false;
+bool hoodState = false;
+
+bool liftState = true;
+
+
 
 void runDriver() {
   stopChassis(coast);
@@ -74,17 +80,18 @@ void runDriver() {
     button_left_arrow = controller_1.ButtonLeft.pressing();
     button_right_arrow = controller_1.ButtonRight.pressing();
 
-    // intake control: R1 in, R2 out
-    int intakePct = (r1 ? 100 : 0) - (r2 ? 100 : 0);
-    if (intakePct > 0) {
-      intake_motor.spin(directionType::fwd, intakePct, velocityUnits::pct);
-    } else if (intakePct < 0) {
-      intake_motor.spin(directionType::rev, -intakePct, velocityUnits::pct);
-    } else {
-      intake_motor.stop(brakeType::coast);
-    }
 
-    // matchload toggle on down arrow
+
+int intakePct = (r1 ? 100 : 0) - (r2 ? 100 : 0);
+if (intakePct > 0) {
+    double veloControl = (liftState ? 0.7 : 1);
+    intake_motor.spin(directionType::fwd, intakePct * veloControl, velocityUnits::pct);
+} else if (intakePct < 0) {
+    intake_motor.spin(directionType::rev, -intakePct, velocityUnits::pct);
+} else {
+    intake_motor.stop(brakeType::coast);
+}
+
     if (button_down_arrow) {
       if (matchloadCD) {
         matchloadCD = false;
@@ -95,7 +102,7 @@ void runDriver() {
       matchloadCD = true;
     }
 
-    // descore toggle on B
+
     if (button_b) {
       if (descoreCD) {
         descoreCD = false;
@@ -106,22 +113,25 @@ void runDriver() {
       descoreCD = true;
     }
 
-    // hood on L1 / off otherwise
-    if (l1) {
-      hood.set(true);
+
+    if (l2) {
+      lift.set(true);
+      liftState = true;
     } else {
-      hood.set(false);
+      lift.set(false);
+      liftState = false;
     }
 
-    // lift toggle on L2
-    if (l2) {
-      if (liftCD) {
-        liftCD = false;
-        liftState = !liftState;
-        lift.set(liftState);
+
+    if (l1) {
+      if (hoodCD) {
+        hoodCD = false;
+        hoodState = !hoodState;
+        hood.set(hoodState);
+        intake_motor.spin(directionType::fwd, 12, velocityUnits::pct);
       }
     } else {
-      liftCD = true;
+      hoodCD = true;
     }
 
     driveChassis(ch3 * 0.12 + ch1 * 0.12 , ch3 * 0.12 - ch1 * 0.12);
@@ -134,7 +144,9 @@ void runPreAutonomous() {
   vexcodeInit();
   
   inertial_sensor.calibrate();
-
+  double initial = inertial_sensor.heading();
+	wait(1000, msec);
+	if(std::abs(inertial_sensor.heading() - initial) > 0.5) drift = true; 
   if (inertial_sensor.isCalibrating()) {
     while (inertial_sensor.isCalibrating()) {
       wait(10, msec);
@@ -142,6 +154,11 @@ void runPreAutonomous() {
     controller_1.rumble(".");
   } else {
     controller_1.rumble("...");
+  }
+  if (drift) {
+    controller_1.rumble("...");
+  }
+
   double current_heading = inertial_sensor.heading();
   Brain.Screen.print(current_heading);
   
@@ -156,5 +173,4 @@ void runPreAutonomous() {
   } else {
     thread odom = thread(trackNoOdomWheel);
   }
-}
 }

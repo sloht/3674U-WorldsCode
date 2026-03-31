@@ -46,7 +46,7 @@ rotation vertical_tracker = rotation(PORT3, true);
 distance front_sensor = distance(PORT8);
 distance left_sensor = distance(PORT16);
 distance right_sensor = distance(PORT11);
-distance back_sensor = distance(PORT9);
+distance back_sensor = distance(PORT3);
 
 //testing githug
 
