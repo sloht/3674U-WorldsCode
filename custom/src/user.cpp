@@ -114,7 +114,7 @@ if (intakePct > 0) {
     }
 
 
-    if (l2) {
+    if (l1) {
       lift.set(true);
       liftState = true;
     } else {
@@ -123,7 +123,7 @@ if (intakePct > 0) {
     }
 
 
-    if (l1) {
+    if (l2) {
       if (hoodCD) {
         hoodCD = false;
         hoodState = !hoodState;
