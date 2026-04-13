@@ -15,10 +15,6 @@
 
 void seven_ball_left() {
     correct_angle = inertial_sensor.rotation();  
-    intake_motor.spin(vex::directionType::rev, 12, voltageUnits::volt);
-    driveTo(24, 2000, true, 10);
-    matchloadwait(460
-    );
-    
+
 
 }

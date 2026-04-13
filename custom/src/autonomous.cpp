@@ -12,3 +12,9 @@
 //inertial_sensor.setRotation(θ, deg);
 //AND use correct_angle = desired angle
 
+void intakeTime(double time_ms) {
+  intake_motor.spin(vex::directionType::rev, 12, voltageUnits::volt);
+  wait(time_ms, msec);
+  intake_motor.stop(brakeType::coast);
+}
+
