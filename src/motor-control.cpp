@@ -822,8 +822,8 @@ void trackXYOdomWheel() {
     double polar_radius_in = sqrt(pow(delta_local_x_in, 2) + pow(delta_local_y_in, 2));
     double polar_angle_rad = local_polar_angle_rad - heading_rad - (delta_heading_rad / 2);
 
-    x_pos += polar_radius_in * cos(polar_angle_rad);
-    y_pos += polar_radius_in * sin(polar_angle_rad);
+    x_pos += polar_radius_in * sin(polar_angle_rad);
+    y_pos += polar_radius_in * cos(polar_angle_rad);
 
     prev_heading_rad = heading_rad;
     prev_horizontal_pos_deg = horizontal_pos_deg;
@@ -875,8 +875,8 @@ void trackXOdomWheel() {
     double polar_radius_in = sqrt(pow(delta_local_x_in, 2) + pow(delta_local_y_in, 2));
     double polar_angle_rad = local_polar_angle_rad - heading_rad - (delta_heading_rad / 2);
 
-    x_pos += polar_radius_in * cos(polar_angle_rad);
-    y_pos += polar_radius_in * sin(polar_angle_rad);
+    x_pos += polar_radius_in * sin(polar_angle_rad);
+    y_pos += polar_radius_in * cos(polar_angle_rad);
     
     prev_heading_rad = heading_rad;
     prev_horizontal_pos_deg = horizontal_pos_deg;
@@ -914,8 +914,8 @@ void trackYOdomWheel() {
     double polar_angle_rad = prev_heading_rad + delta_heading_rad / 2.0;
     double polar_radius_in = delta_local_y_in;
 
-    x_pos += polar_radius_in * cos(polar_angle_rad);
-    y_pos += polar_radius_in * sin(polar_angle_rad);
+    x_pos += polar_radius_in * sin(polar_angle_rad);
+    y_pos += polar_radius_in * cos(polar_angle_rad);
 
     prev_heading_rad = heading_rad;
     prev_vertical_pos_deg = vertical_pos_deg;
@@ -1404,10 +1404,9 @@ wait(raise, msec);
 matchload.set(false);
 };
 
-// ============================================================================
-// TEMPLATE NOTE
-// ============================================================================
-// This file is intended as a template for VEX/V5 robotics teams.
-// All functions and variables use clear, consistent naming conventions.
-// Comments are concise and explain the intent of each section.
-// Teams can adapt PID values, drive base geometry, and logic as needed for their robot.
+void setPoseZero() {
+  x_pos = 0;
+  y_pos = 0;
+  correct_angle = 0;
+  inertial_sensor.setHeading(0, degrees);
+}

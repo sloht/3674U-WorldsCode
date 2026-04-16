@@ -18,3 +18,8 @@ void intakeTime(double time_ms) {
   intake_motor.stop(brakeType::coast);
 }
 
+void outtakeTime(double time_ms) {
+  intake_motor.spin(vex::directionType::fwd, 12, voltageUnits::volt);
+  wait(time_ms, msec);
+  intake_motor.stop(brakeType::coast);
+}

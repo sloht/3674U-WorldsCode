@@ -14,7 +14,8 @@
 
 
 void seven_ball_left() {
-    correct_angle = inertial_sensor.rotation();  
+
+    turnToAngle(75, 1500, true, 12);
 
 
 }

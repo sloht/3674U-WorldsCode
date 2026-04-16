@@ -59,6 +59,7 @@ bool liftState = true;
 void runDriver() {
   stopChassis(coast);
   heading_correction = false;
+  int screenUpdateCounter = 0;
   while (true) {
     // [-100, 100] for controller stick axis values
     ch1 = controller_1.Axis1.value();
@@ -135,6 +136,20 @@ if (intakePct > 0) {
     }
 
     driveChassis(ch3 * 0.12 + ch1 * 0.12 , ch3 * 0.12 - ch1 * 0.12);
+
+    if (++screenUpdateCounter >= 10) {
+      screenUpdateCounter = 0;
+      double leftTemp = (left_chassis1.temperature(temperatureUnits::celsius) + left_chassis2.temperature(temperatureUnits::celsius) + left_chassis3.temperature(temperatureUnits::celsius)) / 3.0;
+      double rightTemp = (right_chassis1.temperature(temperatureUnits::celsius) + right_chassis2.temperature(temperatureUnits::celsius) + right_chassis3.temperature(temperatureUnits::celsius)) / 3.0;
+      double intakeTemp = (lowerIntake.temperature(temperatureUnits::celsius) + upperIntake.temperature(temperatureUnits::celsius)) / 2.0;
+      Brain.Screen.clearScreen();
+      Brain.Screen.setCursor(1, 1);
+      Brain.Screen.print("L: %.1fC", leftTemp);
+      Brain.Screen.newLine();
+      Brain.Screen.print("R: %.1fC", rightTemp);
+      Brain.Screen.newLine();
+      Brain.Screen.print("I: %.1fC", intakeTemp);
+    }
 
     wait(10, msec);
   }

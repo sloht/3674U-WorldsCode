@@ -37,3 +37,4 @@ void resetPositionBack();
 void resetPositionLeft();
 void resetPositionRight();
 void matchloadwait(double t, double raise);
+void setPoseZero();

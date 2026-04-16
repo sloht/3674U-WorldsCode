@@ -16,7 +16,7 @@ controller controller_1 = controller(primary);
 // gearSetting is one of the following: ratio36_1(red), ratio18_1(green), ratio6_1(blue)
 // all chassis motors should be reversed appropriately so that they spin vertical when given a positive voltage input
 // such as driveChassis(12, 12)
-motor left_chassis1 = motor(PORT5, ratio6_1, true);
+motor left_chassis1 = motor(PORT8, ratio6_1, true);
 motor left_chassis2 = motor(PORT18, ratio6_1, true);
 motor left_chassis3 = motor(PORT3, ratio6_1, true);
 motor_group left_chassis = motor_group(left_chassis1, left_chassis2, left_chassis3);
@@ -38,8 +38,8 @@ inertial inertial_sensor = inertial(PORT2);
 
 // Format is rotation(port, reversed)
 // just set these to random ports if you don't use tracking wheels
-rotation horizontal_tracker = rotation(PORT3, true);
-rotation vertical_tracker = rotation(PORT3, true);
+rotation horizontal_tracker = rotation(PORT21, true);
+rotation vertical_tracker = rotation(PORT17, false);
 
 // Distance reset sensors
 // Set these to random ports if you are not using distance resets
@@ -64,13 +64,13 @@ double wheel_distance_in = (36.0 / 48.0) * 3.25 * M_PI;
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
-double distance_kp =.9, distance_ki = 0.0, distance_kd = .5;
-double turn_kp = 0.77, turn_ki = 0, turn_kd = 4;
-double heading_correction_kp = 0.69, heading_correction_ki = 0, heading_correction_kd = 9.81;
+double distance_kp =1.6, distance_ki = 0.0, distance_kd = 11.6;
+double turn_kp = 0.8, turn_ki = 0, turn_kd = 8;
+double heading_correction_kp = 0.7, heading_correction_ki = 0, heading_correction_kd = 7.1;
 
 // Enable or disable the use of tracking wheels
 bool using_horizontal_tracker = false;  // Set to true if a horizontal tracking wheel is installed and used for odometry
-bool using_vertical_tracker = false;   // Set to true if a vertical tracking wheel is installed and used for odometry
+bool using_vertical_tracker = true;   // Set to true if a vertical tracking wheel is installed and used for odometry
 
 // IGNORE THESE IF YOU ARE NOT USING TRACKING WHEELS
 // These comments are in the perspective of a top down view of the robot when the robot is facing vertical
@@ -79,7 +79,7 @@ double horizontal_tracker_dist_from_center = 2.71875;
 // Horizontal distance from the center of the bot to the vertical tracking wheel (in inches, positive is when the wheel is to the right of the center)
 double vertical_tracker_dist_from_center = -0.03125;
 double horizontal_tracker_diameter = 1.975; // Diameter of the horizontal tracker wheel (in inches)
-double vertical_tracker_diameter = 1.975; // Diameter of the vertical tracker wheel (in inches)
+double vertical_tracker_diameter = 2; // Diameter of the vertical tracker wheel (in inches)
 
 // Distance Reset setup
 // Set all of these values to the distance from the respective distance sensor to the robot's center along the axis it faces(in inches)
