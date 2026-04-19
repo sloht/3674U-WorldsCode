@@ -85,7 +85,7 @@ void runDriver() {
 
 int intakePct = (r1 ? 100 : 0) - (r2 ? 100 : 0);
 if (intakePct > 0) {
-    double veloControl = (liftState ? 0.7 : 1);
+    double veloControl = (liftState ? 1 : 1);
     intake_motor.spin(directionType::fwd, intakePct * veloControl, velocityUnits::pct);
 } else if (intakePct < 0) {
     intake_motor.spin(directionType::rev, -intakePct, velocityUnits::pct);
