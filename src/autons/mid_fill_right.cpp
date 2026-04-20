@@ -13,11 +13,11 @@
 //AND use correct_angle = desired angle
 
 void getCenterBlocks() {
-  matchloadwait(400, 400);
+  matchloadwait(410, 450);
 }
 
 void shortIntake() {
-    intakeTime(900);
+    intakeTime(2100);
 }
 
 
@@ -28,12 +28,7 @@ void mid_fill_right() {
     y_pos = 2;
    moveToPoint(10, 26, 1, 2000, false, 12);
     turnToAngle(-45, 1500);
-    driveTo(20, 2000, true, 12);
-    outtakeTime(1200);
-    it.interrupt();
-    ml.interrupt();
-    wait(500, msec);
-    driveTo(-39.23, 2500, false, 12);
+    driveTo(-19.23, 2500, false, 12);
     driveTo(-14,2500, true, 4);
     matchload.set(true);
     turnToAngle(180, 2000, true, 9);
@@ -46,9 +41,11 @@ void mid_fill_right() {
     intakeTime(1200);
 setPoseZero();
 inertial_sensor.setHeading(0, degrees);
-moveToPoint(x_pos-8, y_pos-4, 1, 2000, true, 12);
-turnToAngle(180, 1500, true, 12);
-driveTo(-20, 2000, true, 12);
+turnToAngle(45, 1500, false, 12);
+driveTo(3, 2000, false, 12);
+turnToAngle(15, 1500, false, 12);
+driveTo(-30, 2000, true, 12);
+turnToAngle(-45, 1400, true, 12);
 
 
 
