@@ -17,10 +17,11 @@ void runAutonomous() {
       seven_ball_right();
       break;  
     case 3:
-      mid_fill_left();
+      fourball_left();
       break;
     case 4:
-      mid_fill_right();
+      fourball_right();
+      break;
     case 5:
       long_then_mid_left();
       break;

@@ -1410,3 +1410,22 @@ void setPoseZero() {
   correct_angle = 0;
   inertial_sensor.setHeading(0, degrees);
 }
+
+void getblocks() {
+  matchloadwait(410, 250);
+}
+void IntakeThread() {
+  intakeTime(51500);
+}
+void OuttakeThread() {
+  outtakeTime(1200);
+}
+
+void getCenterBlocks() {
+  matchloadwait(410, 450);
+}
+
+void shortIntake() {
+    intakeTime(2100);
+}
+

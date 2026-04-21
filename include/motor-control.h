@@ -38,3 +38,8 @@ void resetPositionLeft();
 void resetPositionRight();
 void matchloadwait(double t, double raise);
 void setPoseZero();
+void getblocks();
+void IntakeThread();
+void OuttakeThread();
+void shortIntake();
+void getCenterBlocks();
