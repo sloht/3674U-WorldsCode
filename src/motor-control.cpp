@@ -1422,7 +1422,7 @@ void OuttakeThread() {
 }
 
 void getCenterBlocks() {
-  matchloadwait(410, 450);
+  matchloadwait(410, 600);
 }
 
 void shortIntake() {

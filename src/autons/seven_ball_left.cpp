@@ -23,14 +23,15 @@ void seven_ball_left() {
     driveTo(-19.23, 2500, false, 12);
     driveTo(-14,2500, true, 4);
     matchload.set(true);
-    turnToAngle(180, 2000, true, 9);
-    driveTo(14, 1200, true, 12);
+    turnToAngle(180, 350, false, 9);
+    correct_angle = 180;
+    driveTo(11, 1200, true, 12);
     intakeTime(1800);
     turnToAngle(180, 2000, false, 12);
     correct_angle = 180;
     driveTo(-50, 1200, true, 12);
     lift.set(true);
-    intakeTime(1200);
+    intakeTime(400);
 setPoseZero();
 inertial_sensor.setHeading(0, degrees);
 turnToAngle(45, 1500, false, 12);

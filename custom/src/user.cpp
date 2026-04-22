@@ -8,7 +8,7 @@
 bool drift = false;
 
 void runAutonomous() {
-  int auton_selected = 3;
+  int auton_selected = 6;
   switch(auton_selected) {
     case 1:
       seven_ball_left();
