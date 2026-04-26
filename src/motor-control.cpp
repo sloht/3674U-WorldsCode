@@ -357,7 +357,7 @@ void curveCircle(double result_angle_deg, double center_radius, double time_limi
 
   // Normalize the target angle to be within +/-180 degrees of the current heading
   result_angle_deg = normalizeTarget(result_angle_deg);
-  result_angle = (result_angle_deg - correct_angle) * 3.14159265359 / 180;
+  result_angle = (result_angle_deg - correct_angle) * 3.141592653589 / 180;
 
   // Calculate arc lengths for inner and outer wheels
   in_arc = fabs((fabs(center_radius) - (distance_between_wheels / 2)) * result_angle);
@@ -1408,14 +1408,14 @@ void setPoseZero() {
   x_pos = 0;
   y_pos = 0;
   correct_angle = 0;
-  inertial_sensor.setHeading(0, degrees);
+   inertial_sensor.setHeading(0, degrees);
 }
 
 void getblocks() {
   matchloadwait(410, 250);
 }
-void IntakeThread() {
-  intakeTime(51500);
+void IntakeThread() { //PLEASW FIX SOHAM SOHAM SOHAM
+  intakeTime(9000);
 }
 void OuttakeThread() {
   outtakeTime(1200);
@@ -1426,6 +1426,6 @@ void getCenterBlocks() {
 }
 
 void shortIntake() {
-    intakeTime(2100);
+    intakeTime(21500);
 }
 
